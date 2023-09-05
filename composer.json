@@ -1,0 +1,24 @@
+{
+    "name": "darkmatterfr/constellation-sdk",
+    "type": "laravel-package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Darkmatterfr\\ConstellationSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dark Matter FR",
+            "email": "dev@darkmatterfr.io"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Darkmatterfr\\ConstellationSdk\\Providers\\ConstellationServiceProvider"
+            ]
+        }
+    },
+    "require": {}
+}
