@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'constellation_app_key' => env('CONSTELLATION_APP_KEY'),
+    'app_key' => env('CONSTELLATION_APP_KEY'),
+    'project-key' => env('CONSTELLATION_PROJECT_KEY'),
 ];
