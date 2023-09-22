@@ -12,7 +12,6 @@ use Illuminate\Queue\Events\JobProcessing;
 
 class EventServiceProvider extends ServiceProvider
 {
-
     protected $listen = [
         JobProcessing::class => [
             CreateConstellationJob::class,
@@ -30,12 +29,9 @@ class EventServiceProvider extends ServiceProvider
 
     /**
      * Register any events for your application.
-     *
-     * @return void
      */
     public function boot(): void
     {
         parent::boot();
     }
-
 }

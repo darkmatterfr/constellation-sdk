@@ -1,11 +1,11 @@
 <?php
+
 namespace Darkmatterfr\ConstellationSdk\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 class ConstellationServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap services.
      *

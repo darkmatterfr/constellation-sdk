@@ -21,6 +21,7 @@
         }
     },
     "require": {
-        "ext-http": "*"
+        "ext-http": "*",
+        "ext-mbstring": "*"
     }
 }
