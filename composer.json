@@ -20,5 +20,8 @@
             ]
         }
     },
-    "require": {}
+    "require": {
+        "ext-http": "*",
+        "ext-mbstring": "*"
+    }
 }
