@@ -12,12 +12,13 @@ class CreateConstellationJob
     public function handle(JobProcessing $event): void
     {
         $this->getConstellationAPIRequest()
-            ->post('http://constellation.test/api/job', [
+            ->post('/job', [
                 'new' => true,
                 'job_id' => $event->job->getJobId(),
-                'name' => $event->job->getName(),
+                'name' => $event->job->resolveName(),
                 'queue' => $event->job->getQueue(),
                 'failed' => $event->job->hasFailed(),
+                'env' => app()->environment(),
                 'exception_message' => null,
                 'started_at' => now(),
                 'attempt' => $event->job->attempts(),
