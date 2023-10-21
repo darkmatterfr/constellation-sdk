@@ -6,6 +6,7 @@ use Darkmatterfr\ConstellationSdk\Traits\APIHelper;
 use Illuminate\Queue\Events\JobExceptionOccurred;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessed;
+use Illuminate\Support\Str;
 
 class UpdateConstellationJob
 {
@@ -13,6 +14,11 @@ class UpdateConstellationJob
 
     public function handle(JobProcessed|JobFailed|JobExceptionOccurred $event): void
     {
+        $message = null;
+        if (property_exists($event, 'exception')) {
+            $message = $event->exception->getMessage().' in '.$event->exception->getFile().':'.$event->exception->getLine();
+        }
+
         $this->getConstellationAPIRequest()
             ->post('/job', [
                 'new' => false,
@@ -22,8 +28,12 @@ class UpdateConstellationJob
                 'failed' => $event->job->hasFailed(),
                 'started_at' => now(),
                 'env' => app()->environment(),
-                'exception_message' => property_exists($event, 'exception') ?
-                    mb_strcut($event->exception->getMessage(), 0, 65535)
+                'exception_message' => $message,
+                'exception_trace' => property_exists($event, 'exception') ?
+                    Str::substr($event->exception->getTraceAsString(), 0, 65535)
+                    : null,
+                'exception_type' => property_exists($event, 'exception') ?
+                    get_class($event->exception)
                     : null,
                 'attempt' => $event->job->attempts(),
                 'progress' => 0,
